@@ -2,7 +2,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
+const url = require('url');
+
 require('dotenv').config();
+
+
+const baseUrl = 'https://frantic-slug-undershirt.cyclic.app';
 
 const port =process.env.port ||3000;
 
@@ -39,7 +44,12 @@ app.post("/shorten", async (req, res) => {
     }
 
     // Construct the shortened URL and return it to the user
-    const shortenedUrl = `/${id}`;
+    const shortenedUrl = url.format({
+      protocol: baseUrl.protocol,
+      host: baseUrl.host,
+      pathname: `/${id}`,
+    });
+    //const shortenedUrl = `/${id}`;
     res.send({ url: shortenedUrl });
   } catch (err) {
     console.error(err);
