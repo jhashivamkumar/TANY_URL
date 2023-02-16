@@ -44,12 +44,12 @@ app.post("/shorten", async (req, res) => {
     }
 
     // Construct the shortened URL and return it to the user
-    const shortenedUrl = url.format({
-      protocol: baseUrl.protocol,
-      host: baseUrl.host,
-      pathname: `/${id}`,
-    });
-    //const shortenedUrl = `/${id}`;
+    // const shortenedUrl = url.format({
+    //   protocol: baseUrl.protocol,
+    //   host: baseUrl.host,
+    //   pathname: `/${id}`,
+    // });
+    const shortenedUrl = `${baseUrl}/${id}`;
     res.send({ url: shortenedUrl });
   } catch (err) {
     console.error(err);
